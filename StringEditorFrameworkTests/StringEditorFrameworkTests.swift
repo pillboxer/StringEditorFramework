@@ -11,24 +11,87 @@ import XCTest
 
 class StringEditorFrameworkTests: XCTestCase {
 
+   let manager = BitbucketManager.shared
+    
     override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        let semaphore = DispatchSemaphore(value: 0)
+        manager.load { (error) in
+            if let error = error {
+                starPrint(error)
+            }
+            semaphore.signal()
+        }
+        semaphore.wait()
     }
-
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    
+    func testLatestHashIsValidHash() {
+        let expectation = self.expectation(description: "Valid Hash Expectation")
+        var latestHash: String?
+        
+        manager.getLatestHash { (error, commitHash) in
+            latestHash = commitHash
+            expectation.fulfill()
+        }
+        waitForExpectations(timeout: 25, handler: nil)
+        
+        if let latestHash = latestHash {
+            XCTAssertTrue(latestHash.count == 40, "\(latestHash.count) is not equal to 40")
         }
     }
-
+    
+    func testStringsFileIsRetrievable() {
+        XCTAssert(manager.latestStrings != nil)
+    }
+    
+    func testCanAddToStringsFile() {
+        let newKey = "*** THIS IS MY KEY ***"
+        let newValue = "*** THIS IS MY VALUE ***"
+        if var stringsFile = manager.latestStrings {
+            stringsFile.add(key: newKey, value: newValue)
+            XCTAssert(stringsFile.contains(key: newKey))
+        }
+        else {
+            XCTAssert(false)
+        }
+        
+    }
+    
+    func testAddedKeyAndValueAreInNewStringsFile() {
+        
+        let expectation = self.expectation(description: "New Strings File Contains Key And Value")
+        let key = UUID().uuidString
+        let value = "MyValue"
+        
+        if var stringsFile  = manager.latestStrings {
+            if !stringsFile.add(key: key, value: value) {
+                XCTAssert(false, "File already contains key")
+                return
+            }
+            
+            let endpoint = Endpoint.src
+            var request = URLRequest(endpoint: endpoint)
+            var latestError: RequestError?
+            request.postWithData(data: stringsFile.dataReadyForFormRequest(formKey: endpoint.formKey)) { (error) in
+                latestError = error
+                self.manager.load { (error) in
+                    latestError = error
+                    if let latestError = latestError {
+                        print(latestError)
+                        XCTAssert(false)
+                        return
+                    }
+                    expectation.fulfill()
+                }
+                
+            }
+            waitForExpectations(timeout: 25, handler: nil)
+            
+            guard let latestStrings = self.manager.latestStrings else {
+                XCTAssert(false)
+                return
+            }
+            
+            XCTAssert(latestStrings.contains(key: key))
+        }
+    }
 }

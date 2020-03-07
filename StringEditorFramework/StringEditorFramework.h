@@ -15,5 +15,3 @@ FOUNDATION_EXPORT double StringEditorFrameworkVersionNumber;
 FOUNDATION_EXPORT const unsigned char StringEditorFrameworkVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <StringEditorFramework/PublicHeader.h>
-
-

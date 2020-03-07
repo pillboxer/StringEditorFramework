@@ -3,13 +3,23 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		86668310240EADD6002B7D46 /* StringEditorFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86668306240EADD6002B7D46 /* StringEditorFramework.framework */; };
+		860CEE922411687F00B2A708 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 860CEE912411687F00B2A708 /* String+Extensions.swift */; };
+		860CEE9724116A7900B2A708 /* NSObject+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 860CEE9624116A7900B2A708 /* NSObject+Extensions.swift */; };
+		860CEE9924116FE600B2A708 /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 860CEE9824116FE600B2A708 /* KeychainManager.swift */; };
+		860CEE9C2411729300B2A708 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 860CEE9B2411729300B2A708 /* KeychainAccess */; };
 		86668315240EADD6002B7D46 /* StringEditorFrameworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86668314240EADD6002B7D46 /* StringEditorFrameworkTests.swift */; };
 		86668317240EADD6002B7D46 /* StringEditorFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = 86668309240EADD6002B7D46 /* StringEditorFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		86668323240EADF4002B7D46 /* URLRequest+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86668321240EADF4002B7D46 /* URLRequest+Extensions.swift */; };
+		86668324240EADF4002B7D46 /* Swift+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86668322240EADF4002B7D46 /* Swift+Extensions.swift */; };
+		86668327240EAE03002B7D46 /* RepositoryCommit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86668326240EAE03002B7D46 /* RepositoryCommit.swift */; };
+		8666832B240EAE0C002B7D46 /* EndpointType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86668329240EAE0C002B7D46 /* EndpointType.swift */; };
+		8666832C240EAE0C002B7D46 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8666832A240EAE0C002B7D46 /* Endpoint.swift */; };
+		8666832F240EAE13002B7D46 /* BitbucketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8666832E240EAE13002B7D46 /* BitbucketManager.swift */; };
+		86ECFC00240EEEAC001F2DF8 /* StringEditorFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86668306240EADD6002B7D46 /* StringEditorFramework.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -23,12 +33,21 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		860CEE912411687F00B2A708 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
+		860CEE9624116A7900B2A708 /* NSObject+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Extensions.swift"; sourceTree = "<group>"; };
+		860CEE9824116FE600B2A708 /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 		86668306240EADD6002B7D46 /* StringEditorFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StringEditorFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		86668309240EADD6002B7D46 /* StringEditorFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StringEditorFramework.h; sourceTree = "<group>"; };
 		8666830A240EADD6002B7D46 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8666830F240EADD6002B7D46 /* StringEditorFrameworkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StringEditorFrameworkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		86668314240EADD6002B7D46 /* StringEditorFrameworkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringEditorFrameworkTests.swift; sourceTree = "<group>"; };
 		86668316240EADD6002B7D46 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		86668321240EADF4002B7D46 /* URLRequest+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URLRequest+Extensions.swift"; sourceTree = "<group>"; };
+		86668322240EADF4002B7D46 /* Swift+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Swift+Extensions.swift"; sourceTree = "<group>"; };
+		86668326240EAE03002B7D46 /* RepositoryCommit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepositoryCommit.swift; sourceTree = "<group>"; };
+		86668329240EAE0C002B7D46 /* EndpointType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndpointType.swift; sourceTree = "<group>"; };
+		8666832A240EAE0C002B7D46 /* Endpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		8666832E240EAE13002B7D46 /* BitbucketManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BitbucketManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,6 +55,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				860CEE9C2411729300B2A708 /* KeychainAccess in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -43,7 +63,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				86668310240EADD6002B7D46 /* StringEditorFramework.framework in Frameworks */,
+				86ECFC00240EEEAC001F2DF8 /* StringEditorFramework.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -53,6 +73,10 @@
 		866682FC240EADD6002B7D46 = {
 			isa = PBXGroup;
 			children = (
+				86668320240EADF4002B7D46 /* Extensions */,
+				86668325240EAE03002B7D46 /* Models */,
+				86668328240EAE0C002B7D46 /* NetworkingLayer */,
+				8666832D240EAE13002B7D46 /* Authentication */,
 				86668308240EADD6002B7D46 /* StringEditorFramework */,
 				86668313240EADD6002B7D46 /* StringEditorFrameworkTests */,
 				86668307240EADD6002B7D46 /* Products */,
@@ -86,6 +110,43 @@
 			path = StringEditorFrameworkTests;
 			sourceTree = "<group>";
 		};
+		86668320240EADF4002B7D46 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				86668321240EADF4002B7D46 /* URLRequest+Extensions.swift */,
+				86668322240EADF4002B7D46 /* Swift+Extensions.swift */,
+				860CEE912411687F00B2A708 /* String+Extensions.swift */,
+				860CEE9624116A7900B2A708 /* NSObject+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		86668325240EAE03002B7D46 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				86668326240EAE03002B7D46 /* RepositoryCommit.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		86668328240EAE0C002B7D46 /* NetworkingLayer */ = {
+			isa = PBXGroup;
+			children = (
+				86668329240EAE0C002B7D46 /* EndpointType.swift */,
+				8666832A240EAE0C002B7D46 /* Endpoint.swift */,
+			);
+			path = NetworkingLayer;
+			sourceTree = "<group>";
+		};
+		8666832D240EAE13002B7D46 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				8666832E240EAE13002B7D46 /* BitbucketManager.swift */,
+				860CEE9824116FE600B2A708 /* KeychainManager.swift */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -114,6 +175,9 @@
 			dependencies = (
 			);
 			name = StringEditorFramework;
+			packageProductDependencies = (
+				860CEE9B2411729300B2A708 /* KeychainAccess */,
+			);
 			productName = StringEditorFramework;
 			productReference = 86668306240EADD6002B7D46 /* StringEditorFramework.framework */;
 			productType = "com.apple.product-type.framework";
@@ -163,6 +227,9 @@
 				Base,
 			);
 			mainGroup = 866682FC240EADD6002B7D46;
+			packageReferences = (
+				860CEE9A2411729300B2A708 /* XCRemoteSwiftPackageReference "KeychainAccess" */,
+			);
 			productRefGroup = 86668307240EADD6002B7D46 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -195,6 +262,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8666832B240EAE0C002B7D46 /* EndpointType.swift in Sources */,
+				860CEE922411687F00B2A708 /* String+Extensions.swift in Sources */,
+				8666832F240EAE13002B7D46 /* BitbucketManager.swift in Sources */,
+				86668323240EADF4002B7D46 /* URLRequest+Extensions.swift in Sources */,
+				860CEE9924116FE600B2A708 /* KeychainManager.swift in Sources */,
+				86668324240EADF4002B7D46 /* Swift+Extensions.swift in Sources */,
+				86668327240EAE03002B7D46 /* RepositoryCommit.swift in Sources */,
+				8666832C240EAE0C002B7D46 /* Endpoint.swift in Sources */,
+				860CEE9724116A7900B2A708 /* NSObject+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -387,6 +463,7 @@
 		8666831E240EADD6002B7D46 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 89H8N24D6B;
@@ -405,6 +482,7 @@
 		8666831F240EADD6002B7D46 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 89H8N24D6B;
@@ -451,6 +529,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		860CEE9A2411729300B2A708 /* XCRemoteSwiftPackageReference "KeychainAccess" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kishikawakatsumi/KeychainAccess";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.1.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		860CEE9B2411729300B2A708 /* KeychainAccess */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 860CEE9A2411729300B2A708 /* XCRemoteSwiftPackageReference "KeychainAccess" */;
+			productName = KeychainAccess;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 866682FD240EADD6002B7D46 /* Project object */;
 }
