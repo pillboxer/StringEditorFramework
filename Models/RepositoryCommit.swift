@@ -8,7 +8,7 @@
 
 import Foundation
 
-public typealias KeysAndValues = [(key: String, value: String)]
+public typealias KeyAndValue = (key: String, value: String)
 
 
 struct RepositoryCommitSource: Decodable {
@@ -43,6 +43,8 @@ struct RepositoryRendered: Decodable {
 public class StringsFile: Codable {
     
     var language: String?
+    var contentVersion: String?
+    
     public var strings: [String: String]
     
     public var displayTuples: [(key: String, value: String)] {
@@ -53,7 +55,7 @@ public class StringsFile: Codable {
         return strings.contains() { $0.key.trimmingCharacters(in: .whitespaces) == key }
     }
     
-    @discardableResult public func addKeysAndValues(_ keysAndValues: KeysAndValues) -> String? {
+    @discardableResult public func addKeysAndValues(_ keysAndValues: [KeyAndValue]) -> String? {
         for keyAndValue in keysAndValues {
             if !add(key: keyAndValue.key, value: keyAndValue.value) {
                 return keyAndValue.key
@@ -62,7 +64,17 @@ public class StringsFile: Codable {
         return nil
     }
     
-    @discardableResult public func add(key: String, value: String) -> Bool {
+    func editKeysAndValues(fromDict dict: [String : KeyAndValue]) {
+        for edit in dict {
+            let oldKey = edit.key
+            let newKey = edit.value.key
+            let newValue = edit.value.value
+            strings.removeValue(forKey: oldKey)
+            strings[newKey] = newValue
+        }
+    }
+    
+    @discardableResult func add(key: String, value: String) -> Bool {
         guard !contains(key: key) else {
             return false
         }
@@ -78,7 +90,7 @@ public class StringsFile: Codable {
             let encoded = try encoder.encode(self)
             if let prettyString = String(data: encoded, encoding: .utf8),
                 let percentEncoded = prettyString.addingPercentEncoding(withAllowedCharacters: .alphanumerics) {
-                let formatted = "\(formKey)=\(percentEncoded)"
+                let formatted = "\(formKey)=\(percentEncoded)&message=FinalChange"
                 data = formatted.data(using: .utf8)
             }
             return data

@@ -12,7 +12,6 @@ import KeychainAccess
 public enum LoginError: Error {
     case badCredentials
     case keychainError
-    case loadError(LoadError)
     case requestError(RequestError)
     
     public var localizedDescription: String {
@@ -23,28 +22,17 @@ public enum LoginError: Error {
             return "Could not save to keychain"
         case .requestError(let error):
             return error.localizedDescription
-        case .loadError(let error):
-            return error.localizedDescription
         }
     }
 }
 
-public enum LoadError: Error {
-    case noCredentials
-    case badCredentials
-    case requestError(RequestError)
-}
-
 public enum StringEditError: Error {
-    case loadError(LoadError)
     case requestError(RequestError)
     case noStringsExist
     case keyAlreadyExists(String)
     
     public var localizedDescription: String {
         switch self {
-        case .loadError(let error):
-            return error.localizedDescription
         case .requestError(let error):
             return error.localizedDescription
         case .noStringsExist:
@@ -61,10 +49,10 @@ public enum LoadingState {
     case pulling
     case pushing
     case complete
-    case error(LoadError)
+    case error(RequestError)
 }
 
-public enum Platform {
+public enum Platform: String {
     case ios
     case android
     
@@ -80,7 +68,7 @@ public enum Platform {
     var fileLocation: String {
         switch self {
         case .ios:
-            return "/ios/strings/v1/ios-strings-base.json"
+            return "/ios/strings/V1/ios-strings-base.json"
         default:
             return "/android/strings/strings.json"
         }
@@ -98,7 +86,7 @@ public class BitbucketManager {
     // MARK: - Private Properites
     private var hash: String?
     // MARK: - Exposed Properties
-    var platform: Platform = .ios
+    var platform: Platform = UserDefaults.selectedPlatform
     
     public var latestStrings: StringsFile?
     public var latestMessage: String?
@@ -106,7 +94,7 @@ public class BitbucketManager {
     public weak var delegate: BitbucketManagerDelegate?
     
     // MARK: - Exposed Methods
-    public func load(completion: @escaping (LoadError?) -> Void) {
+    public func load(completion: @escaping (RequestError?) -> Void) {
         guard let _ = KeychainManager.shared.credentials else {
             return completion(.noCredentials)
         }
@@ -114,9 +102,11 @@ public class BitbucketManager {
             if let error = error {
                 switch error {
                 case .badCredentials:
-                    return completion(.badCredentials)
+                    KeychainManager.shared.deleteCredentials()
+                    self.delegate?.bitbucketManagerLoadingStateDidChange(.error(.badCredentials))
+                    return completion(error)
                 default:
-                    return completion(.requestError(error))
+                    return completion(error)
                 }
             }
             self.hash = commit?.hash
@@ -124,7 +114,7 @@ public class BitbucketManager {
             
             self.getLatestStrings { (error) in
                 if let error = error {
-                    return completion(.requestError(error))
+                    return completion(error)
                 }
                 self.delegate?.bitbucketManagerLoadingStateDidChange(.complete)
                 return completion(nil)
@@ -132,10 +122,10 @@ public class BitbucketManager {
         }
     }
     
-    public func addToStrings(keysAndValues: KeysAndValues, completion: @escaping (StringEditError?) -> Void) {
+    public func addToStrings(keysAndValues: [KeyAndValue], editedStrings: [String : KeyAndValue]?, completion: @escaping (StringEditError?) -> Void) {
         load { (error) in
             if let error = error {
-                return completion(.loadError(error))
+                return completion(.requestError(error))
             }
             guard let strings = self.latestStrings else {
                 return completion(.noStringsExist)
@@ -145,6 +135,9 @@ public class BitbucketManager {
             var request = URLRequest(endpoint: endpoint)
             if let string = strings.addKeysAndValues(keysAndValues) {
                 return completion(.keyAlreadyExists(string))
+            }
+            if let editedStrings = editedStrings {
+                strings.editKeysAndValues(fromDict: editedStrings)
             }
             
             self.delegate?.bitbucketManagerLoadingStateDidChange(.pushing)
@@ -157,8 +150,22 @@ public class BitbucketManager {
         }
     }
     
-    public func changePlatformTo(_ newPlatform: Platform) {
+    public func changePlatformTo(_ newPlatform: Platform, completion: @escaping (RequestError?) -> Void) {
         platform = newPlatform
+        UserDefaults.storePlatform(newPlatform)
+        getLatestStrings { (error) in
+            if let error = error {
+                return completion(error)
+            }
+            completion(nil)
+        }
+    }
+    
+    public func storeCredentials(username: String, password: String) -> Bool {
+        guard KeychainManager.shared.storeCredentials(username: username, password: password) else {
+            return false
+        }
+        return true
     }
     
     public func checkCredentials(username: String, password: String, completion: @escaping (LoginError?) -> Void) {
@@ -170,10 +177,10 @@ public class BitbucketManager {
             if let error = error {
                 KeychainManager.shared.deleteCredentials()
                 switch error {
-                case .badCredentials:
+                case .badCredentials, .noCredentials:
                     return completion(.badCredentials)
                 default:
-                    return completion(.loadError(error))
+                    return completion(.requestError(error))
                 }
             }
             else {

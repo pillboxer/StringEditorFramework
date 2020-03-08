@@ -16,6 +16,7 @@ public enum RequestError: Error {
     case noResponse
     case dataTaskError(String)
     case badCredentials
+    case noCredentials
     
     public var localizedDescription: String {
         switch self {
@@ -29,6 +30,8 @@ public enum RequestError: Error {
             return "Request error: \(description)"
         case .badCredentials:
             return "Incorrect username or password"
+        case .noCredentials:
+            return "User has no credentials stored"
         }
     }
 }

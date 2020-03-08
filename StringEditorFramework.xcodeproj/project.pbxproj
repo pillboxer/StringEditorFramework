@@ -19,6 +19,8 @@
 		8666832B240EAE0C002B7D46 /* EndpointType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86668329240EAE0C002B7D46 /* EndpointType.swift */; };
 		8666832C240EAE0C002B7D46 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8666832A240EAE0C002B7D46 /* Endpoint.swift */; };
 		8666832F240EAE13002B7D46 /* BitbucketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8666832E240EAE13002B7D46 /* BitbucketManager.swift */; };
+		866A89102415616600F686C4 /* NSTextField+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866A890F2415616600F686C4 /* NSTextField+Extensions.swift */; };
+		866A89122415AC8400F686C4 /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866A89112415AC8400F686C4 /* UserDefaults+Extensions.swift */; };
 		86ECFC00240EEEAC001F2DF8 /* StringEditorFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86668306240EADD6002B7D46 /* StringEditorFramework.framework */; };
 /* End PBXBuildFile section */
 
@@ -48,6 +50,8 @@
 		86668329240EAE0C002B7D46 /* EndpointType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndpointType.swift; sourceTree = "<group>"; };
 		8666832A240EAE0C002B7D46 /* Endpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		8666832E240EAE13002B7D46 /* BitbucketManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BitbucketManager.swift; sourceTree = "<group>"; };
+		866A890F2415616600F686C4 /* NSTextField+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSTextField+Extensions.swift"; sourceTree = "<group>"; };
+		866A89112415AC8400F686C4 /* UserDefaults+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,9 +118,11 @@
 			isa = PBXGroup;
 			children = (
 				86668321240EADF4002B7D46 /* URLRequest+Extensions.swift */,
+				866A89112415AC8400F686C4 /* UserDefaults+Extensions.swift */,
 				86668322240EADF4002B7D46 /* Swift+Extensions.swift */,
 				860CEE912411687F00B2A708 /* String+Extensions.swift */,
 				860CEE9624116A7900B2A708 /* NSObject+Extensions.swift */,
+				866A890F2415616600F686C4 /* NSTextField+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -270,6 +276,8 @@
 				86668324240EADF4002B7D46 /* Swift+Extensions.swift in Sources */,
 				86668327240EAE03002B7D46 /* RepositoryCommit.swift in Sources */,
 				8666832C240EAE0C002B7D46 /* Endpoint.swift in Sources */,
+				866A89122415AC8400F686C4 /* UserDefaults+Extensions.swift in Sources */,
+				866A89102415616600F686C4 /* NSTextField+Extensions.swift in Sources */,
 				860CEE9724116A7900B2A708 /* NSObject+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
