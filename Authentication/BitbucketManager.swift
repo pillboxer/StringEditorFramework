@@ -68,7 +68,7 @@ public enum Platform: String {
     var fileLocation: String {
         switch self {
         case .ios:
-            return "/ios/strings/V1/ios-strings-base.json"
+            return "/ios/strings/v1/ios-strings-base.json"
         default:
             return "/android/strings/strings.json"
         }
@@ -122,7 +122,7 @@ public class BitbucketManager {
         }
     }
     
-    public func addToStrings(keysAndValues: [KeyAndValue], editedStrings: [String : KeyAndValue]?, completion: @escaping (StringEditError?) -> Void) {
+    public func addToStrings(keysAndValues: [KeyAndValue], editedStrings: [String : KeyAndValue]?, commitMessage: String, completion: @escaping (StringEditError?) -> Void) {
         load { (error) in
             if let error = error {
                 return completion(.requestError(error))
@@ -141,7 +141,7 @@ public class BitbucketManager {
             }
             
             self.delegate?.bitbucketManagerLoadingStateDidChange(.pushing)
-            request.postWithData(data: strings.dataReadyForFormRequest(formKey: endpoint.formKey)) { (error) in
+            request.postWithData(data: strings.dataReadyForFormRequest(formKey: endpoint.formKey, commitMessage: commitMessage)) { (error) in
                 if let error = error {
                     return completion(.requestError(error))
                 }
@@ -152,11 +152,11 @@ public class BitbucketManager {
     
     public func changePlatformTo(_ newPlatform: Platform, completion: @escaping (RequestError?) -> Void) {
         platform = newPlatform
-        UserDefaults.storePlatform(newPlatform)
-        getLatestStrings { (error) in
+        load { (error) in
             if let error = error {
                 return completion(error)
             }
+            UserDefaults.storePlatform(newPlatform)
             completion(nil)
         }
     }
@@ -201,6 +201,7 @@ public class BitbucketManager {
             if let error = error {
                 return completion(error)
             }
+            print(stringsFile?.strings.count)
             self.latestStrings = stringsFile
             completion(nil)
         }

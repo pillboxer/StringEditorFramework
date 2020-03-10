@@ -47,7 +47,7 @@ public class StringsFile: Codable {
     
     public var strings: [String: String]
     
-    public var displayTuples: [(key: String, value: String)] {
+    public var displayTuples: [KeyAndValue] {
         return strings.sorted() { $0.key < $1.key }
     }
     
@@ -82,7 +82,7 @@ public class StringsFile: Codable {
         return true
     }
     
-    func dataReadyForFormRequest(formKey: String) -> Data? {
+    func dataReadyForFormRequest(formKey: String, commitMessage: String) -> Data? {
         let encoder = JSONEncoder()
         encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
         var data: Data?
@@ -90,7 +90,7 @@ public class StringsFile: Codable {
             let encoded = try encoder.encode(self)
             if let prettyString = String(data: encoded, encoding: .utf8),
                 let percentEncoded = prettyString.addingPercentEncoding(withAllowedCharacters: .alphanumerics) {
-                let formatted = "\(formKey)=\(percentEncoded)&message=FinalChange"
+                let formatted = "\(formKey)=\(percentEncoded)&message=\(commitMessage)"
                 data = formatted.data(using: .utf8)
             }
             return data

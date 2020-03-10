@@ -50,7 +50,7 @@ extension EndpointType {
         var components = URLComponents()
         components.scheme = "https"
         components.host = "api.bitbucket.org"
-        components.path = "/2.0/repositories/touchnote-team/mobile-cms"
+        components.path = "/2.0/repositories/pillboxer/henry-test-repo"
         return components.url!
     }
     
