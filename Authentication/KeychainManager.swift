@@ -42,7 +42,6 @@ class KeychainManager {
             try keychain.remove(KeychainDataType.credentials.rawValue)
         }
         catch let error {
-            #warning("Handle me")
             print(error)
         }
     }

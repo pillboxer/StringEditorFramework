@@ -85,13 +85,17 @@ public class BitbucketManager {
     
     // MARK: - Private Properites
     private var hash: String?
+    private var latestStrings: StringsFile?
+
     // MARK: - Exposed Properties
     var platform: Platform = UserDefaults.selectedPlatform
-    
-    public var latestStrings: StringsFile?
     public var latestMessage: String?
     
     public weak var delegate: BitbucketManagerDelegate?
+    
+    public var displayTuples: [KeyAndValue]? {
+        return latestStrings?.displayTuples
+    }
     
     // MARK: - Exposed Methods
     public func load(completion: @escaping (RequestError?) -> Void) {
@@ -189,6 +193,10 @@ public class BitbucketManager {
         }
     }
     
+    public func logout() {
+        KeychainManager.shared.deleteCredentials()
+    }
+    
     // MARK: - Private Methods
     private func getLatestStrings(completion: @escaping (RequestError?) -> Void) {
         delegate?.bitbucketManagerLoadingStateDidChange(.pulling)
@@ -197,11 +205,29 @@ public class BitbucketManager {
         }
         let endpoint = Endpoint.strings(hash)
         let request = URLRequest(endpoint: endpoint)
-        request.getDecodable(decoding: StringsFile.self) { (error, stringsFile) in
+        if endpoint.isIos {
+            decodeRequestForIos(request, completion: completion)
+        }
+        else {
+            decodeRequestForAndroid(request, completion: completion)
+        }
+    }
+    
+    private func decodeRequestForIos(_ request: URLRequest, completion: @escaping (RequestError?) -> Void) {
+        request.getDecodable(decoding: IosStringsFile.self) { (error, stringsFile) in
             if let error = error {
                 return completion(error)
             }
-            print(stringsFile?.strings.count)
+            self.latestStrings = stringsFile
+            completion(nil)
+        }
+    }
+    
+    private func decodeRequestForAndroid(_ request: URLRequest, completion: @escaping (RequestError?) -> Void) {
+        request.getDecodable(decoding: AndroidStringsFile.self) { (error, stringsFile) in
+            if let error = error {
+                return completion(error)
+            }
             self.latestStrings = stringsFile
             completion(nil)
         }
@@ -223,6 +249,4 @@ public class BitbucketManager {
             }
         }
     }
-    
-    
 }

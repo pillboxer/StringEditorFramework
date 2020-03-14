@@ -34,4 +34,8 @@ enum Endpoint: EndpointType {
     var url: URL {
         return baseURL.appendingPathComponent(resource.path)
     }
+    
+    var isIos: Bool {
+        return BitbucketManager.shared.platform == .ios
+    }
 }
