@@ -94,7 +94,11 @@ public extension StringsFile {
     
     func dataReadyForFormRequest(formKey: String, commitMessage: String) -> Data? {
         let encoder = JSONEncoder()
-        encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
+        if #available(OSX 10.15, *) {
+            encoder.outputFormatting = [.prettyPrinted, .sortedKeys, .withoutEscapingSlashes]
+        } else {
+            // Fallback on earlier versions
+        }
         var data: Data?
         do {
             let encoded = try encoder.encode(self)
@@ -208,6 +212,7 @@ class IosStringsFile: StringsFile {
     private var strings: [String: String]
     
     var displayTuples: [KeyAndValue] {
+        starPrint(strings.count)
         let sortedKeysAndValues = strings.sorted() { $0.key < $1.key }
         let keysAndValues = sortedKeysAndValues.map() { KeyAndValue(key: $0.key, value: $0.value) }
         return keysAndValues

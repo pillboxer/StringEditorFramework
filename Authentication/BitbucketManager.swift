@@ -205,6 +205,7 @@ public class BitbucketManager {
         }
         let endpoint = Endpoint.strings(hash)
         let request = URLRequest(endpoint: endpoint)
+        starPrint(request)
         if endpoint.isIos {
             decodeRequestForIos(request, completion: completion)
         }
@@ -237,8 +238,6 @@ public class BitbucketManager {
         delegate?.bitbucketManagerLoadingStateDidChange(.fetching)
         let endpoint = Endpoint.commits
         let request = URLRequest(endpoint: endpoint)
-        starPrint(request)
-        
         request.getDecodable(decoding: RepositoryCommitSource.self) { (error, commitJSON) in
             if let error = error {
                 return completion(error, nil)
