@@ -68,7 +68,7 @@ public enum Platform: String {
     var fileLocation: String {
         switch self {
         case .ios:
-            return "/ios/strings/v1/ios-strings-base.json"
+            return "/ios/strings/V1/ios-strings-base.json"
         default:
             return "/android/strings/strings.json"
         }

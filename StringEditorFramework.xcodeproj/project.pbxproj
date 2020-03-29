@@ -11,6 +11,7 @@
 		860CEE9724116A7900B2A708 /* NSObject+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 860CEE9624116A7900B2A708 /* NSObject+Extensions.swift */; };
 		860CEE9924116FE600B2A708 /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 860CEE9824116FE600B2A708 /* KeychainManager.swift */; };
 		860CEE9C2411729300B2A708 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 860CEE9B2411729300B2A708 /* KeychainAccess */; };
+		865881652430AAA80039162D /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 865881642430AAA80039162D /* Environment.swift */; };
 		86668315240EADD6002B7D46 /* StringEditorFrameworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86668314240EADD6002B7D46 /* StringEditorFrameworkTests.swift */; };
 		86668317240EADD6002B7D46 /* StringEditorFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = 86668309240EADD6002B7D46 /* StringEditorFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		86668323240EADF4002B7D46 /* URLRequest+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86668321240EADF4002B7D46 /* URLRequest+Extensions.swift */; };
@@ -34,10 +35,24 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		8668FE6F24309B6A00CBB05E /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		860CEE912411687F00B2A708 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		860CEE9624116A7900B2A708 /* NSObject+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Extensions.swift"; sourceTree = "<group>"; };
 		860CEE9824116FE600B2A708 /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
+		865881642430AAA80039162D /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		86668306240EADD6002B7D46 /* StringEditorFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StringEditorFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		86668309240EADD6002B7D46 /* StringEditorFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StringEditorFramework.h; sourceTree = "<group>"; };
 		8666830A240EADD6002B7D46 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -140,6 +155,7 @@
 			children = (
 				86668329240EAE0C002B7D46 /* EndpointType.swift */,
 				8666832A240EAE0C002B7D46 /* Endpoint.swift */,
+				865881642430AAA80039162D /* Environment.swift */,
 			);
 			path = NetworkingLayer;
 			sourceTree = "<group>";
@@ -175,6 +191,7 @@
 				86668302240EADD6002B7D46 /* Sources */,
 				86668303240EADD6002B7D46 /* Frameworks */,
 				86668304240EADD6002B7D46 /* Resources */,
+				8668FE6F24309B6A00CBB05E /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -269,6 +286,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8666832B240EAE0C002B7D46 /* EndpointType.swift in Sources */,
+				865881652430AAA80039162D /* Environment.swift in Sources */,
 				860CEE922411687F00B2A708 /* String+Extensions.swift in Sources */,
 				8666832F240EAE13002B7D46 /* BitbucketManager.swift in Sources */,
 				86668323240EADF4002B7D46 /* URLRequest+Extensions.swift in Sources */,
@@ -357,7 +375,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG DEV";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
