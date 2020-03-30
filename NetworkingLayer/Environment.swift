@@ -10,12 +10,9 @@ import Foundation
 
 public class Environment {
     
-    public static var isDev: Bool {
-        #if DEV
-            return true
-        #else
-            return false
-        #endif
-    }
+    public static var isDev = true
     
+    public static func setEnvironment(_ bool: Bool) {
+        isDev = bool
+    }
 }

@@ -97,7 +97,7 @@ public extension StringsFile {
         if #available(OSX 10.15, *) {
             encoder.outputFormatting = [.prettyPrinted, .sortedKeys, .withoutEscapingSlashes]
         } else {
-            // Fallback on earlier versions
+            encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
         }
         var data: Data?
         do {
