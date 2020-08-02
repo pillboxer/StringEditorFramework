@@ -27,7 +27,7 @@ enum EndpointResource {
     var path: String {
         switch self {
         case .commits:
-            return "commits"
+            return "commits/\(Environment.branchName)"
         case .strings(let hash):
             let currentPlatform = BitbucketManager.shared.platform
             return currentPlatform.platformPath(withHash: hash)
@@ -59,7 +59,7 @@ extension EndpointType {
     }
     
     private var path: String {
-        return Environment.isDev ? "/2.0/repositories/pillboxer/henry-test-repo" : "/2.0/repositories/touchnote-team/mobile-cms"
+        return "/2.0/repositories/touchnote-team/mobile-cms"
     }
     
 }

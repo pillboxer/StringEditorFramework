@@ -15,4 +15,8 @@ public class Environment {
     public static func setEnvironment(_ bool: Bool) {
         isDev = bool
     }
+    
+    public static var branchName: String {
+        return isDev ? "develop" : "master"
+    }
 }

@@ -104,9 +104,9 @@ public class BitbucketManager {
         }
         getLatestCommit { (error, commit) in
             if let error = error {
+                KeychainManager.shared.deleteCredentials()
                 switch error {
                 case .badCredentials:
-                    KeychainManager.shared.deleteCredentials()
                     self.delegate?.bitbucketManagerLoadingStateDidChange(.error(.badCredentials))
                     return completion(error)
                 default:

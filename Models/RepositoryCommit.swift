@@ -104,7 +104,7 @@ public extension StringsFile {
             let encoded = try encoder.encode(self)
             if let prettyString = String(data: encoded, encoding: .utf8),
                 let percentEncoded = prettyString.addingPercentEncoding(withAllowedCharacters: .alphanumerics) {
-                let formatted = "\(formKey)=\(percentEncoded)&message=\(commitMessage)"
+                let formatted = "\(formKey)=\(percentEncoded)&message=\(commitMessage)&branch=\(Environment.branchName)"
                 data = formatted.data(using: .utf8)
             }
             return data

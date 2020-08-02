@@ -34,6 +34,15 @@ public enum RequestError: Error {
             return "User has no credentials stored"
         }
     }
+    
+    public var isNoCredentialsError: Bool {
+        switch self {
+        case .noCredentials:
+            return true
+        default:
+            return false
+        }
+    }
 }
 
 enum ContentType: String {
